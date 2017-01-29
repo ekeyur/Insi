@@ -1,0 +1,25 @@
+<!-- <ul ng-repeat="company in companies">
+<li>{{Company.Name}}</li>
+</ul> -->
+
+
+  <div class="container-fluid" style="background-color : lightskyblue;">
+      <h4 style = "float:left;">Target Companies</h4><span></span>
+      <a ui-sref="addcompany"><button style = "margin-top: 5px;" type="button" class="btn btn-primary">Add</button></a>
+  </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+      <div class="list-group">
+        <div ng-repeat="company in companies">
+          <a  ui-sref="companies.company({name:company.name})" ui-sref-active="active" class="list-group-item">{{company.name}}<span><button ng-click="delete($index)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>Delete</button></span><span><button ng-click="edit($index)" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span>Edit</button></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="company-detail">
+        <ui-view></ui-view>
+      </div>
+    </div>
+  </div>
+</div>

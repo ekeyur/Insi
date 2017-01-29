@@ -1,0 +1,61 @@
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Add Target Company</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Name</label>
+  <div class="col-md-4">
+  <input type="text" placeholder="Google" ng-model="name" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Category</label>
+  <div class="col-md-4">
+  <input type="text" placeholder="placeholder" ng-model="category" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Status</label>
+  <div class="col-md-4">
+    <select name="selectbasic" class="form-control" ng-model="status">
+      <option value="researching" selected="selected">researching</option>
+      <option value="pending approval">pending approval</option>
+      <option value="approved">approved</option>
+      <option value="denied">denied</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Contacts</label>
+  <div class="col-md-4">
+  <input type="text" placeholder="George Burdell" ng-model = "contact1" class="form-control input-md">
+  <input type="text" placeholder="Adam Trien" ng-model = "contact2" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textarea">Comments</label>
+  <div class="col-md-4">
+    <textarea class="form-control" placeholder="Revenue is steady year over year." ng-model="comments"></textarea>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button ng-click="addcompany()" class="btn btn-primary">Submit</button>
+  </div>
+</div>
+</fieldset>
+</form>
