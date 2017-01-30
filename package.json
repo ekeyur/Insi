@@ -1,7 +1,6 @@
 {
   "name": "insiten",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,5 +11,14 @@
     "A"
   ],
   "author": "keyur",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekeyur/Insi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ekeyur/Insi/issues"
+  },
+  "homepage": "https://github.com/ekeyur/Insi#readme",
+  "description": ""
 }

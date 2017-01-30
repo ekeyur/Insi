@@ -1,3 +1,48 @@
-{{companyInfo.name}}
-{{companyInfo.status}}
-{{companyInfo.catogery}}
+<div class="form-horizontal">
+  <fieldset>
+    <legend>{{companyInfo.name}}</legend>
+      <!-- Inputting Name -->
+      <div class="form-group">
+        <label class="col-lg-2 col-md-2 control-label">Name:</label>
+        <div class="col-lg-10 col-md-10">
+          <span>{{companyInfo.name}}</span>
+        </div>
+      </div>
+      <!-- Inputting Category -->
+      <div class="form-group">
+        <label class="col-lg-2 col-md-2 control-label">Category:</label>
+        <div class="col-lg-10 col-md-10">
+        {{companyInfo.category}}
+        </div>
+      </div>
+      <!-- Inputting Select Status -->
+      <div class="form-group">
+        <label class="col-lg-2 col-md-2 control-label">Status:</label>
+        <div class="col-lg-10 col-md-10">
+          {{companyInfo.status}}
+        </div>
+      </div>
+      <!-- Inputting Contact Info -->
+      <div class="form-group">
+        <label class="col-lg-2 col-md-2 control-label">Contacts:</label>
+        <div class="col-lg-10 col-md-10">
+        <p ng-repeat="contact in companyInfo.contacts">{{contact}}</p>
+        </div>
+      </div>
+      <!-- Inputting Comments -->
+      <div class="form-group">
+        <label class="col-lg-2 col-md-2 control-label">Comments:</label>
+        <div class="col-lg-10 col-md-10">
+        {{companyInfo.comments}}
+        </div>
+      </div>
+      <div class="">
+        <nvd3 options="companyInfo.options" data="companyInfo.performance"></nvd3>
+      </div>
+
+  </fieldset>
+</div>
+
+<div class="editcompany">
+  <ui-view></ui-view>
+</div>

@@ -1,4 +1,4 @@
-var app = angular.module('insiten',['ui.router']);
+var app = angular.module('insiten',['ui.router','nvd3']);
 
 app.config(function($stateProvider,$urlRouterProvider){
   $stateProvider
@@ -15,8 +15,8 @@ app.config(function($stateProvider,$urlRouterProvider){
     controller: 'companyController'
   })
   .state({
-    name: 'companies.company.edit',
-    url: '/edit',
+    name: 'companies.edit',
+    url: '/{name}/edit',
     templateUrl:'editcompany.html',
     controller: 'editcompanyController'
   })
@@ -44,29 +44,32 @@ app.factory('API',function($http){
   // };
 
   service.companies = [
-    {"name": "IBM","status":"researching","category":"Computer Software & Services","contacts":["Keyur Patel","Jason Stathan"],"comments": "poor"},
-    {"name": "Insiten","status":"pending","category":"M&A assist Software","contacts":["Adam Trien","Gentry Ganote "],"comments": "good"}
+    {"name": "Rigor","status":"researching","category":"Computer Software & Services","contacts":["Keyur Patel","Jason Stathan"],"comments": "poor","performance":[[2011,10000],[2012,12000],[2013,13000],[2014,15000],[2015,20000],[2016,23000]]},
+    {"name": "Insiten","status":"pending","category":"M&A assist Software","contacts":["Adam Trien","Gentry Ganote "],"comments": "good","performance":[[2011,10000],[2012,12000],[2013,15000],[2014,20000],[2015,28000],[2016,39000]]}
   ];
   return service;
 });
 
 //Controller that shows the list of all the companies.
 // Deleting and editing a company functions are also present here.
-app.controller('companiesController',function($scope,API,$state){
+app.controller('companiesController',function($scope,API,$state,$rootScope){
   // API.companies().success(function(data){
   //   $scope.companies = data;
   //   $scope.delete = function($index){
   //     $scope.companies.splice($index,1);
   //   };
   // });
+  $rootScope.editC = false;
   $scope.companies = API.companies;
-    $scope.delete = function($index){
-      $scope.companies.splice($index,1);
-    };
-    $scope.edit = function($index){
-      $scope.editcompany = API.companies[$index];
-      // $state.go(API.companies[$index].name+"/edit");
-    };
+
+  $scope.delete = function($index){
+    $scope.companies.splice($index,1);
+  };
+
+  // $scope.edit = function($index){
+  //   $scope.editcompany = API.companies[$index];
+  //   $rootScope.editC = true;
+  // };
   });
 
 
@@ -85,16 +88,72 @@ $scope.addcompany = function(){
   };
 });
 
-// Filter the company that is selected to know which record to display.
-app.controller('companyController',function($scope,API,$stateParams){
-    var cname = API.companies.filter(function(a){
+// Display the selected company controller
+app.controller('companyController',function($scope,API,$stateParams,$rootScope){
+    let cname = API.companies.filter(function(a){
       return a.name === $stateParams.name;
     });
-    $scope.companyInfo = cname[0];
+    $rootScope.editC = false;
+    // Display Graph
+
+    var options = {
+            chart: {
+                type: 'historicalBarChart',
+                height: 450,
+                margin : {
+                    top: 20,
+                    right: 20,
+                    bottom: 65,
+                    left: 50
+                },
+                x: function(d){return d[0];},
+                y: function(d){return d[1]/100000;},
+                showValues: true,
+                valueFormat: function(d){
+                    return d3.format(',.1f')(d);
+                },
+                duration: 100,
+                xAxis: {
+                    axisLabel: 'X Axis',
+                    tickFormat: function(d) {
+                        return d3.time.format('%x')(new Date(d))
+                    },
+                    rotateLabels: 30,
+                    showMaxMin: false
+                },
+                yAxis: {
+                    axisLabel: 'Y Axis',
+                    axisLabelDistance: -10,
+                    tickFormat: function(d){
+                        return d3.format(',.1f')(d);
+                    }
+                },
+                tooltip: {
+                    keyFormatter: function(d) {
+                        return d3.time.format('%x')(new Date(d));
+                    }
+                },
+                zoom: {
+                    enabled: true,
+                    scaleExtent: [1, 10],
+                    useFixedDomain: false,
+                    useNiceScale: false,
+                    horizontalOff: false,
+                    verticalOff: true,
+                    unzoomEventType: 'dblclick.zoom'
+                }
+            }
+        };
+        cname[0].options = options;
+        console.log("optoinasfasd asdf",cname[0]);
+        $scope.companyInfo = cname[0];
   });
 
 // Edit company controller
 app.controller('editcompanyController',function($scope,API,$stateParams,$state){
-  console.log($stateParams.name);
-
+  let cname = API.companies.filter(function(e){
+    return e.name === $stateParams.name;
+  });
+  $scope.editCompany = cname[0];
+  console.log($scope.editCompany);
 });
