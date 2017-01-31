@@ -10,16 +10,20 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-      <table>
+
+      <ul class="list-group">
+        <li ng-repeat="company in companies | orderBy:'company.name'" class="list-group-item" ui-sref="companies.company({name:company.name})" ui-sref-active="active">{{company.name}}</li>
+      </ul>
+      <!-- <table>
         <tr height="40" ng-repeat="company in companies | orderBy:'company.name'">
           <td><button class="btn btn-primary" ui-sref="companies.company({name:company.name})" ui-sref-active="active">{{company.name}}</button></td>
-          <!-- <td><button ng-click="delete($index)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Delete</button></td>
-          <td><button  ui-sref="companies.edit({name:company.name})" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span>Edit</button></td> -->
+          <td><button ng-click="delete($index)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Delete</button></td>
+          <td><button  ui-sref="companies.edit({name:company.name})" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span>Edit</button></td>
         </tr>
         <tr>
           <td colspan="3"><button ui-sref="addcompany()" style = "margin-top: 5px;" type="button" class="btn btn-warning">Add Company</button></td>
         </tr>
-      </table>
+      </table> -->
     </div>
     <div class="col-md-10 company" style="">
       <div class="company-detail">
