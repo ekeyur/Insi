@@ -7,8 +7,8 @@
 
 .navigation {
   background-color : white;
-  border-radius : 3px;
-  border: 1px solid gray;
+  /*border-radius : 3px;*/
+  border-bottom: 1px solid gray;
 }
 
 .editbox{
@@ -20,3 +20,13 @@
 /*.right {
   float: right;
 }*/
+.company {
+  /*margin-left: 2%;*/
+}
+.info {
+  padding-top: 5%;
+  padding-left: 3%;
+}
+.data {
+  padding-left: 3%;
+}

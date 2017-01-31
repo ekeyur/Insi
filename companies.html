@@ -1,7 +1,7 @@
 
   <div class="container navigation">
-      <h4 style = "float:left;">Target Companies</h4><span></span>
-      <button ui-sref="addcompany()" style = "margin-top: 5px;" type="button" class="btn btn-warning">Add Company</button>
+      <h4 style = "float:left;">Track App</h4><span></span>
+      <!-- <button ui-sref="addcompany()" style = "margin-top: 5px;" type="button" class="btn btn-warning">Add Company</button> -->
   </div>
 
   <div class="" style="margin-top: 20px;">
@@ -9,19 +9,19 @@
   </div>
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2">
       <table>
-        <tr height="40" ng-repeat="company in companies">
+        <tr height="40" ng-repeat="company in companies | orderBy:'company.name'">
           <td><button class="btn btn-primary" ui-sref="companies.company({name:company.name})" ui-sref-active="active">{{company.name}}</button></td>
-          <td><button ng-click="delete($index)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Delete</button></td>
-          <td><button  ui-sref="companies.edit({name:company.name})" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span>Edit</button></td>
+          <!-- <td><button ng-click="delete($index)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Delete</button></td>
+          <td><button  ui-sref="companies.edit({name:company.name})" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span>Edit</button></td> -->
         </tr>
         <tr>
           <td colspan="3"><button ui-sref="addcompany()" style = "margin-top: 5px;" type="button" class="btn btn-warning">Add Company</button></td>
         </tr>
       </table>
     </div>
-    <div class="col-md-7" style="">
+    <div class="col-md-10 company" style="">
       <div class="company-detail">
         <ui-view></ui-view>
       </div>
