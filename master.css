@@ -30,3 +30,16 @@
 .data {
   padding-left: 3%;
 }
+
+.addcompanybutton{
+  margin-top: -5px;
+}
+
+.header{
+  margin-top: 3px;
+  font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1.4em;
+  border-bottom: 1px solid lightgray;
+  padding-left: 3px;
+  margin-bottom: 12px;
+}

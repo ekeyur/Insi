@@ -1,6 +1,6 @@
 <div class="form-horizontal">
   <fieldset>
-    <legend style="margin-left:2%;"><span>{{companyInfo.name}}</span><button ng-click="delete($index)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Delete</button><button  ui-sref="companies.edit({name:companyInfo.name})" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span>Edit</button> </legend>
+    <legend style="margin-left:2%;"><span>{{companyInfo.name}}</span><button ng-click="delete(companyInfo.name)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Delete</button><button  ui-sref="companies.edit({name:companyInfo.name})" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span>Edit</button> </legend>
       <!-- Company Information -->
       <div class="row">
         <div class="col-md-7">
@@ -25,7 +25,7 @@
             </tr>
             <!-- Inputting Comments -->
             <tr>
-              <td valign="top" class="info data">Comments:</td>
+              <td valign="top" class="info">Comments:</td>
               <td class="info data">{{companyInfo.comments}}</td>
             </tr>
           </table>
