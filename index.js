@@ -10,6 +10,12 @@ app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
     controller: 'companiesController'
   })
   .state({
+    name: 'companies.home',
+    url: '/home',
+    templateUrl:'home.html',
+    controller: 'homeController'
+  })
+  .state({
     name: 'companies.company',
     url: '/{name}',
     templateUrl:'company.html',
@@ -29,7 +35,7 @@ app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
     controller:'addcompanyController'
   });
 
-  $urlRouterProvider.otherwise('/companies');
+  $urlRouterProvider.otherwise('/companies/home');
 });
 
 
@@ -60,6 +66,8 @@ app.factory('API',function($http){
 app.controller('companiesController',function($scope,API,$state,$rootScope){
 
 
+
+
   $scope.companies = API.companies;
 
   //Function to delete a record
@@ -68,21 +76,37 @@ app.controller('companiesController',function($scope,API,$state,$rootScope){
       return item.name !== name;
     });
     $state.go('companies');
-  };
+    };
+  });
 
+//Home Controller
+  app.controller('homeController', function($scope, $stateParams, $state) {
+    $state.go('companies.home');
   });
 
 
 //Add Company Controller
 app.controller('addcompanyController',function($scope,API,$state){
 $scope.addcompany = function(){
+
+  // Add fake financial data when a new company is added.
+  let years = [2011,2012,2013,2014,2015,2016];
+  var findata = [];
+  for(let i=0;i<years.length;i++){
+    findata[i] = [years[i],(Math.floor((Math.random() * 25) + 1))*1000];
+  }
+
+  var performance = [{"key" : "quantity","bar":"true","values":findata}];
+
+  console.log(performance);
+
   var newcompany = {
     "name" : $scope.name,
     "category" : $scope.category,
     "status" : $scope.status,
     "contacts" : [$scope.contact1,$scope.contact2],
-    "comments" : $scope.comments
-
+    "comments" : $scope.comments,
+    "performance" : performance
     };
   API.companies.push(newcompany);
   $state.go('companies');
@@ -145,6 +169,8 @@ app.controller('companyController',function($scope,API,$stateParams,$rootScope){
 
 // Edit company controller
 app.controller('editcompanyController',function($scope,API,$stateParams,$state){
+  //For going back to the company page after editing
+  $scope.companies = API.companies;
   let cname = API.companies.filter(function(e){
     return e.name === $stateParams.name;
   });
