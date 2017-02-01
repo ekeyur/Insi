@@ -101,7 +101,7 @@ app.controller('companiesController',function($scope,API,$state,$rootScope){
     $scope.companies = $scope.companies.filter(function(item){
       return item.name !== name;
     });
-    $state.go('companies');
+    $state.go('companies.home');
     };
   });
 
