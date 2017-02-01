@@ -1,6 +1,7 @@
 var app = angular.module('insiten',['ui.router','nvd3']);
 
 app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
+  // This line is added to take off the "!" from the url adjacent to "#" sign.
   $locationProvider.hashPrefix('');
   $stateProvider
   .state({
@@ -156,7 +157,7 @@ app.controller('companyController',function($scope,API,$stateParams,$rootScope){
             }
           }
         };
-    // Add options to the object
+    // Add options to the object for display purpose
     cname[0].options = options;
     $scope.companyInfo = cname[0];
   });
@@ -169,5 +170,4 @@ app.controller('editcompanyController',function($scope,API,$stateParams,$state){
     return e.name === $stateParams.name;
   });
   $scope.editCompany = cname[0];
-  console.log($scope.editCompany);
 });
