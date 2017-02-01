@@ -82,7 +82,7 @@ $scope.addcompany = function(){
     "status" : $scope.status,
     "contacts" : [$scope.contact1,$scope.contact2],
     "comments" : $scope.comments
-    
+
     };
   API.companies.push(newcompany);
   $state.go('companies');
@@ -121,7 +121,7 @@ app.controller('companyController',function($scope,API,$stateParams,$rootScope){
                     showMaxMin: true
                 },
                 yAxis: {
-                    axisLabel: 'Revenue ($)',
+                    axisLabel: 'Revenue (USD)',
                     axisLabelDistance: -10,
                     tickFormat: function(d){
                         return d3.format(',.0f')(d);

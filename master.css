@@ -1,40 +1,41 @@
-.btn{
-  float: right;
-  padding: 3px 6px;
-  margin-top: -3px;
-  margin-right: 5px;
-}
 
+
+
+/*Navbar on the top*/
 .navigation {
   background-color : white;
   /*border-radius : 3px;*/
   border-bottom: 1px solid gray;
 }
 
-.editbox{
-  background-color : cornflowerblue;
-  border-radius: 10px;
-  margin-right : 15px;
-  margin-left : 15px;
+/*parent container for companies list*/
+.companies{
+  margin-bottom: 3%;
 }
-/*.right {
+
+.legendstyle{
+  margin-left:2%;
+  display: flex;
+  align-items: center;
+}
+
+.editdeletebuttons{
   float: right;
-}*/
-.company {
-  /*margin-left: 2%;*/
+  margin-left: 1%;
 }
+
+
+/*Display information*/
 .info {
   padding-top: 5%;
-  padding-left: 3%;
+
 }
 .data {
   padding-left: 3%;
+
 }
 
-.addcompanybutton{
-  margin-top: -5px;
-}
-
+/*Header on top of all the companies*/
 .header{
   margin-top: 3px;
   font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
