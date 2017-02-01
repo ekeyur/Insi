@@ -1,33 +1,41 @@
 var app = angular.module('insiten',['ui.router','nvd3']);
 
+
+/// Route Providers
 app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
   // This line is added to take off the "!" from the url adjacent to "#" sign.
   $locationProvider.hashPrefix('');
   $stateProvider
+
+  //List of all companies are on this state
   .state({
     name: 'companies',
     url: '/companies',
     templateUrl:'templates/companies.html',
     controller: 'companiesController'
   })
+  // Showing home page (Landing page)
   .state({
     name: 'companies.home',
     url: '/home',
     templateUrl:'templates/home.html',
     controller: 'homeController'
   })
+  //Showing each of the companies info
   .state({
     name: 'companies.company',
     url: '/{name}',
     templateUrl:'templates/company.html',
     controller: 'companyController'
   })
+  // Editing a particular company
   .state({
     name: 'companies.edit',
     url: '/{name}/edit',
     templateUrl:'templates/editcompany.html',
     controller: 'editcompanyController'
   })
+  // Adding a company
   .state({
     name: 'addcompany',
     url:'/addcompany',
@@ -38,6 +46,27 @@ app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
   $urlRouterProvider.otherwise('/companies/home');
 });
 
+//////////////////////////////////////////
+//Directives
+
+//Label and text input directive
+app.directive('textinput',function(){
+  return {
+    scope: {
+      'value':'=ngModel',
+      'for':'@'
+    },
+    template: `<div class="form-group">
+      <label class="col-lg-2 col-md-2 control-label">{{for}}</label>
+      <div class="col-lg-10 col-md-10">
+      <input type="text" ng-model="value" class="form-control">
+      </div>
+    </div>`
+  };
+});
+
+///////////////////////////////////////////////////////////////
+// Factories
 app.factory('API',function($http){
   var service = {};
   // HTTP request to get the data from data.json
@@ -59,6 +88,9 @@ app.factory('API',function($http){
   ];
   return service;
 });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Controllers
 
 //Controller that shows the list of all the companies.
 // Deleting and editing a company functions are also present here.
