@@ -6,38 +6,36 @@ app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
   .state({
     name: 'companies',
     url: '/companies',
-    templateUrl:'companies.html',
+    templateUrl:'templates/companies.html',
     controller: 'companiesController'
   })
   .state({
     name: 'companies.home',
     url: '/home',
-    templateUrl:'home.html',
+    templateUrl:'templates/home.html',
     controller: 'homeController'
   })
   .state({
     name: 'companies.company',
     url: '/{name}',
-    templateUrl:'company.html',
+    templateUrl:'templates/company.html',
     controller: 'companyController'
   })
   .state({
     name: 'companies.edit',
     url: '/{name}/edit',
-    templateUrl:'editcompany.html',
+    templateUrl:'templates/editcompany.html',
     controller: 'editcompanyController'
   })
-
   .state({
     name: 'addcompany',
     url:'/addcompany',
-    templateUrl:'addcompany.html',
+    templateUrl:'templates/addcompany.html',
     controller:'addcompanyController'
   });
 
   $urlRouterProvider.otherwise('/companies/home');
 });
-
 
 app.factory('API',function($http){
   var service = {};
@@ -64,12 +62,7 @@ app.factory('API',function($http){
 //Controller that shows the list of all the companies.
 // Deleting and editing a company functions are also present here.
 app.controller('companiesController',function($scope,API,$state,$rootScope){
-
-
-
-
   $scope.companies = API.companies;
-
   //Function to delete a record
   $scope.delete = function(name){
     $scope.companies = $scope.companies.filter(function(item){
@@ -80,14 +73,13 @@ app.controller('companiesController',function($scope,API,$state,$rootScope){
   });
 
 //Home Controller
-  app.controller('homeController', function($scope, $stateParams, $state) {
-    $state.go('companies.home');
-  });
-
+app.controller('homeController', function($scope, $stateParams, $state) {
+  $state.go('companies.home');
+});
 
 //Add Company Controller
 app.controller('addcompanyController',function($scope,API,$state){
-$scope.addcompany = function(){
+  $scope.addcompany = function(){
 
   // Add fake financial data when a new company is added.
   let years = [2011,2012,2013,2014,2015,2016];
@@ -95,10 +87,7 @@ $scope.addcompany = function(){
   for(let i=0;i<years.length;i++){
     findata[i] = [years[i],(Math.floor((Math.random() * 25) + 1))*1000];
   }
-
   var performance = [{"key" : "quantity","bar":"true","values":findata}];
-
-  console.log(performance);
 
   var newcompany = {
     "name" : $scope.name,
@@ -108,6 +97,7 @@ $scope.addcompany = function(){
     "comments" : $scope.comments,
     "performance" : performance
     };
+
   API.companies.push(newcompany);
   $state.go('companies');
   };
@@ -120,51 +110,55 @@ app.controller('companyController',function($scope,API,$stateParams,$rootScope){
     });
     // Display Graph
     let options = {
-      chart: {
-                type: 'historicalBarChart',
-                height: 320,
-                margin : {
-                    top: 20,
-                    right: 20,
-                    bottom: 60,
-                    left: 50
+    chart: {
+            type: 'historicalBarChart',
+            height: 320,
+            margin : {
+                top: 20,
+                right: 20,
+                bottom: 60,
+                left: 50
+            },
+            x: function(d){return d[0];},
+            y: function(d){return d[1];},
+            showValues: true,
+            valueFormat: function(d){
+                return d3.format(',.1f')(d);
+            },
+            duration: 100,
+            xAxis: {
+                axisLabel: 'Year Ending',
+                tickFormat: function(d) {
+                    return d3.format('.0f')(d);
                 },
-                x: function(d){return d[0];},
-                y: function(d){return d[1];},
-                showValues: true,
-                valueFormat: function(d){
-                    return d3.format(',.1f')(d);
-                },
-                duration: 100,
-                xAxis: {
-                    axisLabel: 'Year Ending',
-                    tickFormat: function(d) {
-                        return d3.format('.0f')(d);
-                    },
-                    rotateLabels: 50,
-                    showMaxMin: true
-                },
-                yAxis: {
-                    axisLabel: 'Revenue (USD)',
-                    axisLabelDistance: -10,
-                    tickFormat: function(d){
-                        return d3.format(',.0f')(d);
-                    }
-                },
-                zoom: {
-                    enabled: true,
-                    scaleExtent: [1, 10],
-                    useFixedDomain: false,
-                    useNiceScale: true,
-                    horizontalOff: false,
-                    verticalOff: true,
-                    unzoomEventType: 'dblclick.zoom'
+                rotateLabels: 50,
+                showMaxMin: true
+            },
+            title: {
+                    enable: true,
+                    text: "Past Performance"
+            },
+            yAxis: {
+                axisLabel: 'Revenue (USD)',
+                axisLabelDistance: -10,
+                tickFormat: function(d){
+                    return d3.format(',.0f')(d);
                 }
+            },
+            zoom: {
+                enabled: true,
+                scaleExtent: [1, 10],
+                useFixedDomain: false,
+                useNiceScale: true,
+                horizontalOff: false,
+                verticalOff: true,
+                unzoomEventType: 'dblclick.zoom'
             }
+          }
         };
-        // Add options to the object
-        cname[0].options = options;
-        $scope.companyInfo = cname[0];
+    // Add options to the object
+    cname[0].options = options;
+    $scope.companyInfo = cname[0];
   });
 
 // Edit company controller
