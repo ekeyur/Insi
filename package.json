@@ -20,5 +20,8 @@
     "url": "https://github.com/ekeyur/Insi/issues"
   },
   "homepage": "https://github.com/ekeyur/Insi#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "angular-nvd3": "^1.0.9"
+  }
 }
