@@ -19,9 +19,12 @@
         </ul>
       </div>
       <div class="">
-        <button ui-sref="addcompany()" style = "margin-top: 5px;" type="button" class="btn btn-success btn-sm">Add Company</button>
+        <!-- <button ui-sref="addcompany()" ng-click="addNewCompany = true;" style = "margin-top: 5px;" type="button" class="btn btn-success btn-sm">Add Company</button> -->
+
+        <button  ui-sref="companies.editadd({name:'AddNew'})" class="btn btn-success btn-sm editdeletebuttons"><span class="glyphicon glyphicon-edit"></span>Add Company</button>
       </div>
     </div>
+    
     <!-- Company Detail Div -->
     <div class="col-md-10 company" style="">
       <div class="company-detail">

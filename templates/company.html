@@ -1,5 +1,15 @@
 <div class="">
-  <legend class="legendstyle"><span>{{companyInfo.name}}</span><button ng-click="delete(companyInfo.name)" class="btn btn-danger btn-sm editdeletebuttons"><span class="glyphicon glyphicon-remove"></span>Delete</button><button  ui-sref="companies.edit({name:companyInfo.name})" class="btn btn-success btn-sm editdeletebuttons"><span class="glyphicon glyphicon-edit"></span>Edit</button> </legend>
+  <legend class="legendstyle">
+    <span ng-if="companyInfo">{{companyInfo.name}}</span>
+
+    <button ng-click="delete(companyInfo.name)" class="btn btn-danger btn-sm editdeletebuttons"><span class="glyphicon glyphicon-remove"></span>Delete</button>
+
+    <button  ui-sref="companies.editadd({name:companyInfo.name})" class="btn btn-primary btn-sm editdeletebuttons"><span class="glyphicon glyphicon-edit"></span>Edit</button>
+
+    <!-- <button  ui-sref="companies.editadd({name:'AddNew'})" class="btn btn-primary btn-sm editdeletebuttons"><span class="glyphicon glyphicon-edit"></span>Add</button> -->
+
+
+  </legend>
   <!-- Company Information -->
   <div class="row">
     <div class="col-md-7">
@@ -16,11 +26,12 @@
         <!-- Contact Info -->
         <tr>
           <td align="right" class="info">Contacts:</td>
-          <td class="data info">{{companyInfo.contacts[0]}}</td>
+          <td class="data info">{{companyInfo.contacts[0].name}}, &nbsp  <i class="fa fa-phone" aria-hidden="true"></i> {{companyInfo.contacts[0].phone}}</td>
         </tr>
+
         <tr ng-repeat="contact in companyInfo.contacts.slice(1,companyInfo.contacts.length) ">
           <td></td>
-          <td class="data">{{contact}}</td>
+          <td class="data">{{contact.name}},&nbsp  <i class="fa fa-phone" aria-hidden="true"></i> &nbsp{{contact.phone}}</td>
         </tr>
         <!-- Comments -->
         <tr>

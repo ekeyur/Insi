@@ -24,7 +24,10 @@
   margin-left: 1%;
 }
 
-
+.edit-contact-input{
+  border-radius: 4px;
+  font-size: 16px;
+}
 
 /*Display information*/
 .info {
@@ -41,6 +44,10 @@
   height: 350px;
 
 }
+.edit-financial-input{
+  max-width: 60px;
+  border-radius: 4px;
+}
 
 /*Header on top of all the companies*/
 .header{
@@ -50,4 +57,13 @@
   border-bottom: 1px solid lightgray;
   padding-left: 3px;
   margin-bottom: 12px;
+}
+.addcontactsbutton{
+  margin-left: 30px;
+  border-radius: 100px;
+  background-color: white;
+}
+
+.btn{
+  padding: 3px 14px;
 }
