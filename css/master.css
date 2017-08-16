@@ -67,3 +67,22 @@
 .btn{
   padding: 3px 14px;
 }
+
+.companyaddbutton{
+  visibility:hidden;
+}
+
+@media (max-width : 992px) {
+  .companyaddbutton{
+    visibility:visible;
+  }
+  .companiesaddbutton{
+    visibility: hidden;
+  }
+}
+
+@media (max-width : 481px) {
+  .phone-symbol{
+    visibility:hidden;
+  }
+}
