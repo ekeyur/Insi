@@ -1,11 +1,18 @@
 
 
-
 /*Navbar on the top*/
 .navigation {
+  margin-top: 10px;
   background-color : white;
   /*border-radius : 3px;*/
   border-bottom: 1px solid gray;
+  margin-bottom: 1%;
+}
+
+.target{
+  margin-top: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 /*parent container for companies list*/

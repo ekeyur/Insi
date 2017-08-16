@@ -1,8 +1,9 @@
 
 <div class="container navigation">
 
-    <form class="form-group">
-      <h4 style = "col-md-2 col-lg-2">Acquisition Targets</h4><span></span>
+    <form class="row">
+      <p class="target col-md-4 col-lg-4 col-sm-4 col-xs-12">Acquisition Targets</p>
+      <input style="margin-top:5px; font-size : 19px;" class="edit-contact-input col-md-6 col-lg-6 col-sm-6 col-xs-12" type="text" placeholder="search company" ng-model="search">
     </form>
 
     <!-- <button ui-sref="addcompany()" style = "margin-top: 5px;" type="button" class="btn btn-warning">Add Company</button> -->
@@ -19,7 +20,7 @@
       </div>
       <div class="">
         <ul class="list-group">
-          <li ng-repeat="company in companies | orderBy: 'name'" class="list-group-item" ui-sref="companies.company({name:company.name})" ui-sref-active="active">{{company.name}}</li>
+          <li ng-repeat="company in companies | filter:search | orderBy: 'name'" class="list-group-item" ui-sref="companies.company({name:company.name})" ui-sref-active="active">{{company.name}}</li>
         </ul>
       </div>
       <div class="">

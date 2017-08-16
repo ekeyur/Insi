@@ -174,6 +174,7 @@ app.factory('API',function($http){
 //Controller that shows the list of all the companies
 app.controller('companiesController',function($scope,API,$state){
   $scope.companies = API.companies;
+  $scope.search = ' ';
   //Function to delete a record for a given company
   $scope.delete = function(name){
     $scope.companies = $scope.companies.filter(function(item){
@@ -181,6 +182,15 @@ app.controller('companiesController',function($scope,API,$state){
     });
       $state.go('companies.home');
     };
+
+  //Function to updateList based on search keyword
+  
+    // $scope.updateList = function(){
+    //   $scope.filteredCompanies = API.companies.filter(function(company){
+    //     return company.name.match($scope.search);
+    //   });
+    // }
+
   });
 
 //Home Controller
