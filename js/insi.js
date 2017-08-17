@@ -61,7 +61,7 @@ app.directive('textInput',function(){
 });
 
 ///////////////////////////////////////////////////////////////
-// Factories
+// Factory
 app.factory('API',function($http){
 
   var service = {};
@@ -173,18 +173,19 @@ app.factory('API',function($http){
 
 //Controller that shows the list of all the companies
 app.controller('companiesController',function($scope,API,$state){
+
   $scope.companies = API.companies;
   $scope.search = ' ';
-  //Function to delete a record for a given company
+
+  //Function to delete a company
   $scope.delete = function(name){
-    $scope.companies = $scope.companies.filter(function(item){
-      return item.name !== name;
+    $scope.companies = $scope.companies.filter(function(company){
+      return company.name !== name;
     });
       $state.go('companies.home');
     };
 
-  //Function to updateList based on search keyword
-  
+  //Function to filter on search keyword
     // $scope.updateList = function(){
     //   $scope.filteredCompanies = API.companies.filter(function(company){
     //     return company.name.match($scope.search);
@@ -197,48 +198,6 @@ app.controller('companiesController',function($scope,API,$state){
 app.controller('homeController', function($state) {
   $state.go('companies.home');
 });
-
-// Abandoned this controller as using the same controller for adding or editing companies
-
-// //Add Company Controller
-// app.controller('addcompanyController',function($scope,API,$state){
-//   $scope.addcompany = function(){
-//   // Add fake financial data when a new company is added.
-//   $scope.statuses = API.statuses;
-//   let years = [2011,2012,2013,2014,2015,2016];
-//   var fin_data = [];
-//   for(let i=0;i<years.length;i++){
-//     fin_data[i] = [years[i],(Math.floor((Math.random() * 25) + 1))*1000];
-//   }
-//   var performance = [{
-//       key : "quantity",
-//       bar : true,
-//       values : fin_data
-//     }];
-//
-//   var newcompany = {
-//       name : $scope.name,
-//       category : $scope.category,
-//       status : $scope.status,
-//       contacts : [
-//         {
-//           name: $scope.contact1name,
-//           phone: $scope.contact1phone
-//         }
-//       ],
-//       comments : $scope.comments,
-//       performance : [{
-//           key : "quantity",
-//           bar : true,
-//           values : fin_data
-//         }]
-//     };
-//
-//   API.companies.push(newcompany);
-//   $state.go('companies');
-//   };
-// });
-//
 
 // Edit and add company controller
 app.controller('edit-add-companyController',function($scope,API,$stateParams,$state){
@@ -296,7 +255,7 @@ app.controller('edit-add-companyController',function($scope,API,$stateParams,$st
     }
 
     $scope.setShowAddForm = function(){
-      $scope.showaddform = true;
+    $scope.showaddform = true;
     }
   });
 
@@ -358,3 +317,47 @@ app.controller('companyController',function($scope,API,$stateParams,$rootScope){
     cname[0].options = options;
     $scope.companyInfo = cname[0];
   });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // Abandoned this controller as using the same controller for adding or editing companies
+
+  // //Add Company Controller
+  // app.controller('addcompanyController',function($scope,API,$state){
+  //   $scope.addcompany = function(){
+  //   // Add fake financial data when a new company is added.
+  //   $scope.statuses = API.statuses;
+  //   let years = [2011,2012,2013,2014,2015,2016];
+  //   var fin_data = [];
+  //   for(let i=0;i<years.length;i++){
+  //     fin_data[i] = [years[i],(Math.floor((Math.random() * 25) + 1))*1000];
+  //   }
+  //   var performance = [{
+  //       key : "quantity",
+  //       bar : true,
+  //       values : fin_data
+  //     }];
+  //
+  //   var newcompany = {
+  //       name : $scope.name,
+  //       category : $scope.category,
+  //       status : $scope.status,
+  //       contacts : [
+  //         {
+  //           name: $scope.contact1name,
+  //           phone: $scope.contact1phone
+  //         }
+  //       ],
+  //       comments : $scope.comments,
+  //       performance : [{
+  //           key : "quantity",
+  //           bar : true,
+  //           values : fin_data
+  //         }]
+  //     };
+  //
+  //   API.companies.push(newcompany);
+  //   $state.go('companies');
+  //   };
+  // });
+  //
