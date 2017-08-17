@@ -262,7 +262,7 @@ app.controller('edit-add-companyController',function($scope,API,$stateParams,$st
 
 // Display the selected company controller
 app.controller('companyController',function($scope,API,$stateParams,$rootScope){
-    let cname = API.companies.filter(function(company){
+    let company_names = API.companies.filter(function(company){
       return company.name === $stateParams.name;
     });
     // Display Graph
@@ -314,8 +314,8 @@ app.controller('companyController',function($scope,API,$stateParams,$rootScope){
           }
         };
     // Add options to the object for display purpose
-    cname[0].options = options;
-    $scope.companyInfo = cname[0];
+    company_names[0].options = options;
+    $scope.companyInfo = company_names[0];
   });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

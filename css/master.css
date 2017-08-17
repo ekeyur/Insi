@@ -15,6 +15,10 @@
   font-weight: bold;
 }
 
+.green{
+  background-color: green;
+}
+
 /*parent container for companies list*/
 .companies{
   margin-bottom: 3%;

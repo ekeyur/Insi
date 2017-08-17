@@ -20,7 +20,7 @@
       </div>
       <div class="">
         <ul class="list-group">
-          <li ng-repeat="company in companies | filter:search | orderBy: 'name'" class="list-group-item" ui-sref="companies.company({name:company.name})" ui-sref-active="active">{{company.name}}</li>
+          <li ng-class="{'green' : hovering}" ng-mouseover="hovering=true" ng-mouseleave="hovering=false" ng-repeat="company in companies | filter:search | orderBy: 'name'" class="list-group-item" ui-sref="companies.company({name:company.name})" ui-sref-active="active">{{company.name}}</li>
         </ul>
       </div>
       <div class="">
