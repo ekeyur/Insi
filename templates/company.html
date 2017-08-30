@@ -2,9 +2,9 @@
   <legend class="legendstyle">
     <span ng-if="companyInfo">{{companyInfo.name}}</span>
 
-    <button ng-click="delete(companyInfo.name)" class="btn btn-danger btn-sm editdeletebuttons"><span class="glyphicon glyphicon-remove"></span>Delete</button>
+    <button ng-click="delete(companyInfo.id)" class="btn btn-danger btn-sm editdeletebuttons"><span class="glyphicon glyphicon-remove"></span>Delete</button>
 
-    <button  ui-sref="companies.editadd({name:companyInfo.name})" class="btn btn-primary btn-sm editdeletebuttons"><span class="glyphicon glyphicon-edit"></span>Edit</button>
+    <button  ui-sref="companies.editadd({id:companyInfo.id})" class="btn btn-primary btn-sm editdeletebuttons"><span class="glyphicon glyphicon-edit"></span>Edit</button>
 
     <button  ui-sref="companies.editadd({name:'AddNew'})" class="btn btn-success btn-sm companyaddbutton editdeletebuttons"><span class="glyphicon glyphicon-plus"></span>Add</button>
 

@@ -1,69 +1,73 @@
-<div class="form-horizontal">
-  <fieldset>
-    <legend><span ng-if="editAddCompany.name !=='AddNew'">{{editAddCompany.name}}</span><span ng-if="editAddCompany.name === 'AddNew'">Add New</span></legend>
-      <!-- Inputting Name -->
-      <text-input ng-model="editAddCompany.name" for="Name: "></text-input>
-      <!-- Inputting Category -->
-      <text-input ng-model="editAddCompany.category" for="Category: "></text-input>
-      <!-- Inputting Select Status -->
-      <div class="form-group">
-        <label class="col-lg-2 col-md-2 control-label">Status:</label>
-        <div class="col-lg-10 col-md-10">
-          <select class="form-control" ng-selected="editAddCompany.status" ng-model="editAddCompany.status" ng-options="status for status in statuses"></select>
-        </div>
-      </div>
-      <!-- Inputting Contact Info -->
-      <div class="form-group">
-        <label class="col-lg-2 col-md-2 control-label">Contacts:</label>
-        <div class="" ng-repeat="contact in editAddCompany.contacts track by $index">
-        <label class="col-lg-2 col-md-2"></label>
+<form action="submit">
+  <div class="form-horizontal">
+    <fieldset>
+      <legend><span ng-if="editAddCompany.name !=='AddNew'">{{editAddCompany.name}}</span><span ng-if="editAddCompany.name === 'AddNew'">Add New</span></legend>
+        <!-- Inputting Name -->
+        <text-input ng-model="editAddCompany.name" required for="Name: "></text-input>
+        <!-- Inputting Category -->
+        <text-input ng-model="editAddCompany.category" required for="Category: "></text-input>
+        <!-- Inputting Select Status -->
+        <div class="form-group">
+          <label class="col-lg-2 col-md-2 control-label">Status:</label>
           <div class="col-lg-10 col-md-10">
-            <input type="text" ng-model="contact.name" class="edit-contact-input"><span> &nbsp  <i class="fa fa-phone phone-symbol" aria-hidden="true"></i></span>
-            <input type="text" ng-model="contact.phone" class="edit-contact-input">
-            <button ng-show="$last" ng-if="!showaddform" class="addcontactsbutton" ng-click="setShowAddForm()"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+            <select class="form-control" ng-selected="editAddCompany.status" ng-model="editAddCompany.status" ng-options="status for status in statuses"></select>
           </div>
         </div>
-      </div>
-
-      <!-- Add New Contact -->
-      <!-- <div class="form-group" ng-if="!showaddform">
-        <label class="col-lg-2 col-md-2 control-label"></label>
-        <div class="col-lg-10 col-md-10">
-
-        </div>
-      </div> -->
-
-
-      <div ng-show="showaddform">
-        <div class="col-lg-12 col-md-12 jumbotron">
-            <label style="margin-left : 2%;">Name:</label>
-            <input type="text" style="margin-left: 4%;" required ng-model="name" class="edit-contact-input">
-              <span> &nbsp  <i class="fa fa-phone" aria-hidden="true"></i></span>
-              <input type="text" required ng-model="phone" class="edit-contact-input">
-            <button class="btn btn-default" ng-click="addContact()">Save</button>
-        </div>
-      </div>
-
-      <!-- Inputting Comments -->
-      <div class="form-group">
-        <label class="col-lg-2 col-md-2 control-label">Comments:</label>
-        <div class="col-lg-8 col-md-8">
-        <textarea type="text" ng-model="editAddCompany.comments" class="form-control"> </textarea>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-lg-2 col-md-2 control-label">Financials:</label>
-        <div ng-repeat="fin_data in editAddCompany.performance[0].values">
-          <div class="col-lg-1 col-md-1">
-            <span> {{fin_data[0]}} &nbsp <input class="edit-financial-input" type="number" ng-model="fin_data[1]"></span>
+        <!-- Inputting Contact Info -->
+        <div class="form-group">
+          <label class="col-lg-2 col-md-2 control-label">Contacts:</label>
+          <div class="" ng-repeat="contact in editAddCompany.contacts track by $index">
+          <label class="col-lg-2 col-md-2"></label>
+            <div class="col-lg-10 col-md-10">
+              <input type="text" ng-model="contact.name" class="edit-contact-input"><span> &nbsp  <i class="fa fa-phone phone-symbol" aria-hidden="true"></i></span>
+              <input type="text" ng-model="contact.phone" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required class="edit-contact-input" placeholder="(123)563-6782  (required)">
+              <button ng-show="$last" ng-if="!showaddform" class="addcontactsbutton" ng-click="setShowAddForm()"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group editdeletebuttons">
-        <button class="btn btn-primary" ui-sref="companies.company({name:editAddCompany.name})">Submit</button>
-        <!-- <button class="btn btn-primary" ng-click="modifySaveCompany()">{{editAddCompany.name ? 'Update' : 'Save'}}</button> -->
-      </div>
-  </fieldset>
-</div>
+        <!-- Add New Contact -->
+        <!-- <div class="form-group" ng-if="!showaddform">
+          <label class="col-lg-2 col-md-2 control-label"></label>
+          <div class="col-lg-10 col-md-10">
+
+          </div>
+        </div> -->
+
+
+        <div ng-show="showaddform">
+          <form action="submit">
+            <div class="col-lg-12 col-md-12 jumbotron">
+                <label style="margin-left : 2%;">Name:</label>
+                <input type="text" style="margin-left: 4%;" required ng-model="name" class="edit-contact-input">
+                  <span> &nbsp  <i class="fa fa-phone" aria-hidden="true"></i></span>
+                  <input type="text" required ng-model="phone" class="edit-contact-input">
+                <button type="submit" class="btn btn-default" ng-click="addContact()">Save</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Inputting Comments -->
+        <div class="form-group">
+          <label class="col-lg-2 col-md-2 control-label">Comments:</label>
+          <div class="col-lg-8 col-md-8">
+          <textarea type="text" ng-model="editAddCompany.comments" class="form-control"> </textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-lg-2 col-md-2 control-label">Financials:</label>
+          <div ng-repeat="fin_data in editAddCompany.performance[0].values">
+            <div class="col-lg-1 col-md-1">
+              <span> {{fin_data[0]}} &nbsp <input class="edit-financial-input" type="number" ng-model="fin_data[1]"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group editdeletebuttons">
+          <button type="submit" class="btn btn-primary" ui-sref="companies.company({name:editAddCompany.name})">Submit</button>
+          <!-- <button class="btn btn-primary" ng-click="modifySaveCompany()">{{editAddCompany.name ? 'Update' : 'Save'}}</button> -->
+        </div>
+    </fieldset>
+  </div>
+</form>

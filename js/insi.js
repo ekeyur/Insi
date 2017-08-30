@@ -1,4 +1,4 @@
-var app = angular.module('insiten',['ui.router','nvd3']);
+var app = angular.module('insiten',['ui.router','nvd3']);  //,'ngMessages'
 
 /// Route Providers
 app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
@@ -25,7 +25,7 @@ app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
   //Showing each of the companies info
   .state({
     name: 'companies.company',
-    url: '/{name}',
+    url: '/:id',
     templateUrl:'templates/company.html',
     controller: 'companyController'
   })
@@ -33,7 +33,7 @@ app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
   // Editing or adding a company
   .state({
     name: 'companies.editadd',
-    url: '/{name}/editadd',
+    url: '/:id/editadd',
     templateUrl:'templates/editaddcompany.html',
     controller: 'edit-add-companyController'
   })
@@ -82,7 +82,7 @@ app.factory('API',function($http){
         contacts: [
           {
             name: "Evan Spiegel",
-            phone: "408-574-3873"
+            phone: "(408)574-3873"
           }
         ],
         comments: "Snapchat lets you easily talk with friends, view Live Stories from around the world, and explore news in Discover.",
@@ -100,7 +100,7 @@ app.factory('API',function($http){
       contacts:[
         {
           name: "Adam Trian",
-          phone: "408-574-3873"
+          phone: "(408)574-3873"
         }
       ],
       comments: "Insiten works with clients to understand thier business requirements and develop impactful solutions that improve efficiency, collaboration, and visibility.",
@@ -118,7 +118,7 @@ app.factory('API',function($http){
       contacts:[
         {
           name: "Mark Zuckerberg",
-          phone: "408-574-3873"
+          phone: "(408)574-3873"
         }
       ],
       comments: "Facebook is an American for-profit corporation and an online social media and social networking service based in Menlo Park, California.",
@@ -136,7 +136,7 @@ app.factory('API',function($http){
       contacts:[
         {
           name: "Brad Smith",
-          phone: "408-574-3873"
+          phone: "(408)574-3873"
         }
       ],
       comments: "Intuit Inc. is a business and financial software company that develops and sells financial, accounting and tax preparation software and related services for small businesses, accountants and individuals.",
@@ -154,7 +154,7 @@ app.factory('API',function($http){
       contacts:[
           {
             name: "Zeff Bezoz",
-            phone: "408-574-3873"
+            phone: "(408)574-3873"
           }
       ],
       comments: "Amazon.com, Inc. engages in the retail sale of consumer products and subscriptions in North America and internationally. It operates through the North America, International, and Amazon Web Services (AWS) segments. ",
@@ -178,9 +178,9 @@ app.controller('companiesController',function($scope,API,$state){
   $scope.search = ' ';
 
   //Function to delete a company
-  $scope.delete = function(name){
+  $scope.delete = function(id){
     $scope.companies = $scope.companies.filter(function(company){
-      return company.name !== name;
+      return company.id !== id;
     });
       $state.go('companies.home');
     };
@@ -209,11 +209,11 @@ app.controller('edit-add-companyController',function($scope,API,$stateParams,$st
     // If Edit button is pressed it would pass the company name and not 'AddNew'
     if($stateParams.name !== 'AddNew') {
       // searches and returns the company object
-      let cname = API.companies.filter(function(company) {
-        return company.name === $stateParams.name;
+      let filteredCompanies = API.companies.filter(function(company) {
+        return company.id === parseInt($stateParams.id);
       });
       //Saving the company to the scope variable
-      $scope.editAddCompany = cname[0];
+      $scope.editAddCompany = filteredCompanies[0];
     }
     // Else adding a new company
     else
@@ -238,10 +238,10 @@ app.controller('edit-add-companyController',function($scope,API,$stateParams,$st
             }]
         });
 
-        let cname = API.companies.filter(function(company) {
-          return company.name === $stateParams.name;
+        let filteredCompanies = API.companies.filter(function(company) {
+          return company.id === parseInt($stateParams.name);
         });
-        $scope.editAddCompany = cname[0];
+        $scope.editAddCompany = filteredCompanies[0];
         console.log(API);
     }
 
@@ -262,9 +262,11 @@ app.controller('edit-add-companyController',function($scope,API,$stateParams,$st
 
 // Display the selected company controller
 app.controller('companyController',function($scope,API,$stateParams,$rootScope){
-    let company_names = API.companies.filter(function(company){
-      return company.name === $stateParams.name;
+    let filteredCompanies = API.companies.filter(function(company){
+      return company.id === parseInt($stateParams.id);
     });
+
+
     // Display Graph
     let options = {
     chart: {
@@ -314,50 +316,8 @@ app.controller('companyController',function($scope,API,$stateParams,$rootScope){
           }
         };
     // Add options to the object for display purpose
-    company_names[0].options = options;
-    $scope.companyInfo = company_names[0];
+    filteredCompanies[0].options = options;
+    $scope.companyInfo = filteredCompanies[0];
   });
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // Abandoned this controller as using the same controller for adding or editing companies
-
-  // //Add Company Controller
-  // app.controller('addcompanyController',function($scope,API,$state){
-  //   $scope.addcompany = function(){
-  //   // Add fake financial data when a new company is added.
-  //   $scope.statuses = API.statuses;
-  //   let years = [2011,2012,2013,2014,2015,2016];
-  //   var fin_data = [];
-  //   for(let i=0;i<years.length;i++){
-  //     fin_data[i] = [years[i],(Math.floor((Math.random() * 25) + 1))*1000];
-  //   }
-  //   var performance = [{
-  //       key : "quantity",
-  //       bar : true,
-  //       values : fin_data
-  //     }];
-  //
-  //   var newcompany = {
-  //       name : $scope.name,
-  //       category : $scope.category,
-  //       status : $scope.status,
-  //       contacts : [
-  //         {
-  //           name: $scope.contact1name,
-  //           phone: $scope.contact1phone
-  //         }
-  //       ],
-  //       comments : $scope.comments,
-  //       performance : [{
-  //           key : "quantity",
-  //           bar : true,
-  //           values : fin_data
-  //         }]
-  //     };
-  //
-  //   API.companies.push(newcompany);
-  //   $state.go('companies');
-  //   };
-  // });
-  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
